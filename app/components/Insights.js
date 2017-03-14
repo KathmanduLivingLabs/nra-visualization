@@ -34,7 +34,7 @@ var Insights = React.createClass({
 					</div>
 
 					<div className="col-md-12 col-lg-12 col-sm-12">
-						<div className="row-fluid bar-header">Applied for Installments?</div> <a className="more">Learn More >></a>
+						<div className="row-fluid bar-header">Applied for second installment?</div> <a className="more">Learn More >></a>
 						<div className="row-fluid " ><Chart.LineAreaBar  large={this.props.large} columns={this.state.chartData} id = "chart2"  chartType="bar" /></div>
 					</div>
 				</div>

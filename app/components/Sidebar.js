@@ -29,7 +29,7 @@ var Sidebar = React.createClass({
 			 <div id="sidebar" className="sidebar collapsed ">
 			        <div className="sidebar-tabs ">
 			            <ul role="tablist">
-			                <li><a href="#home" role="tab"><i className="fa fa-bars"></i></a></li>
+			                <li><a href="#home" role="tab"><i className="fa fa-area-chart"></i></a></li>
 			            </ul>
 
 
