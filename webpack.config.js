@@ -6,12 +6,6 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 })
 
 
-var osmAuthLandingPage = new HtmlWebpackPlugin({
-    template: __dirname + '/app/land.html',
-    filename: 'land.html',
-})
-
-
 module.exports = {
     entry: [
         './app/index.js'
@@ -27,7 +21,7 @@ module.exports = {
             { test: /\.css$/, loader: "style-loader!css-loader" }
         ]
     },
-    plugins: [HtmlWebpackPluginConfig,osmAuthLandingPage],
+    plugins: [HtmlWebpackPluginConfig],
     node: {
         fs: "empty"
     }

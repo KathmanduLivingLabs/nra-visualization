@@ -1,26 +1,26 @@
 body,
 html {
-    font-family: 'Signika', sans-serif;
+    font-family: 'Open Sans', serif;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-    color: #666;
+    color: #000;
     font-weight: 400;
     width: 100% !important;
-    /*height: 100% !important;*/
+    background-color:   rgb(245,245,245);
 }
 
 h2 {
     margin: 0 0 20px 0;
     font-weight: 600;
     font-size: 36px;
-    color: #333;
+    color: #000;
 }
 
 h3,
 h4 {
     font-size: 20px;
     font-weight: 400;
-    color: #333;
+    color: #000;
 }
 
 h5 {
@@ -39,14 +39,14 @@ p.intro {
 }
 
 a {
-    color: #6aaf08;
+    color: #000;
     font-weight: 400;
 }
 
 a:hover,
 a:focus {
     text-decoration: none;
-    color: #222;
+    color: #000;
 }
 
 ul,
@@ -92,13 +92,13 @@ ol {
 
 .section-title p {
     font-size: 18px;
-    color: #666;
+    color: #000;
 }
 
 .btn-custom {
     text-transform: uppercase;
-    color: #fff;
-    background-color: #6aaf08;
+    color: #000;
+    background-color: #000;
     padding: 14px 20px;
     letter-spacing: 1px;
     margin: 0;
@@ -114,8 +114,8 @@ ol {
 .btn-custom.focus,
 .btn-custom:active,
 .btn-custom.active {
-    color: #fff;
-    background-color: #5f9d07;
+    color: #000;
+    background-color: #000;
 }
 
 .btn:active,
@@ -138,8 +138,64 @@ a:focus,
 }
 
 
-.search-input{
-    display: block;
-    width: 250px;
-    height: 25px;
+/*Navbar Styling*/
+.navbar {
+    margin:0;
+}
+
+.navbar-custom {
+    color: rgb(41,191,154);
+    background-color: rgb(245,245,245);
+}
+
+.navbar-custom a{
+    color: rgb(41,191,154);
+}
+
+/*Maps*/
+
+.test {
+    border :1px solid bisque;
+}
+
+#map {
+    position = relative;
+    height:20px;
+}
+
+.insights-row {
+    height:5vh;
+}
+
+/*Charts*/
+
+.c3 .c3-axis-x path, .c3 .c3-axis-x line {
+    stroke: rgb(245,245,245);
+}
+
+.c3 .c3-axis-y path, .c3 .c3-axis-y line {
+    stroke: rgb(245,245,245);
+}
+
+
+/*Text*/
+.total-surveys {
+    color: rgb(41,191,154);
+    font-weight: bolder;
+    font-size:40px;
+}
+
+.total-survey-label {
+    margin-top:-10px;
+    color: rgb(41,191,154);
+    font-weight: 300;
+    font-size:15px;
+    text-transform:uppercase;
+}
+
+.bar-header {
+    color: rgb(41,191,154);
+    font-weight: 300;
+    font-size:15px;
+    text-transform:uppercase;
 }

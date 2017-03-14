@@ -6,21 +6,12 @@ var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 
-var Home = require('../components/Home');
-var Banks = require('../components/Banks');
-var Schools = require('../components/Schools');
-var Hospitals = require('../components/Hospitals');
-var Edit = require('../components/Edit');
+var Root = require('../components/Root');
 
 var routes = (
     <Router history={hashHistory}>
-		<Route path='/' component = {Home}>
-			<IndexRoute component={Hospitals}/>
-			<Route path = "/banks" component={Banks}/>
-			<Route path = "/schools" component={Schools}/>
-			<Route path = "/hospitals" component={Hospitals}/>
+		<Route path='/' component = {Root}>
 		</Route>
-		<Route path='/edit' component={Edit}/>
 	</Router>
 );
 
