@@ -30,6 +30,7 @@
     "express": "^4.14.1",
     "leaflet": "*",
     "leaflet-search": "^2.7.0",
+    "leaflet-sidebar-v2": "^1.0.0",
     "leaflet-spin": "^1.1.0",
     "lodash": "^4.17.4",
     "nouislider": "^9.2.0",

@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var d3 = require('d3');
 var c3 = require('c3');
 
@@ -7,12 +8,10 @@ var c3 = require('c3');
 //   ['Your Numbers', 50, 20, 10, 40, 15, 25]
 // ];
 var chartHeight=screen.height*0.15;
-console.log(chartHeight);
 
 var LineAreaBar = React.createClass({
   componentWillMount: function() {
     this._updateChart();
-
   },
   componentDidMount: function() {
     this._updateChart();
@@ -21,6 +20,7 @@ var LineAreaBar = React.createClass({
     this._updateChart();
   },
   _updateChart: function() {
+    var labels= this.props.columns[0]
     // console.log("MyColumns", this.props.columns[0])
      c3.generate({
       bindto: '#'+ this.props.id,
@@ -30,32 +30,36 @@ var LineAreaBar = React.createClass({
         colors: {
             yaxis: '#29BF9A'
         },
-        labels:{
-//            format: function (v, id, i, j) { return "Default Format"; },
-//             format: function(v,id,i,j){
-//                return d3.round(v,2);
+        labels: {
+           format: function (v, id, i, j) { return labels[i]==""? "" : labels[i] + " / "+v + "%"},
+//             format: {
+//                 data1: d3.format('$'),
 // //                data1: function (v, id, i, j) { return "Format for data1"; },
 //             }
         }
       },
       axis: {
         x:{
-            type: 'category',
-            tick: {
-                multiline: false
-            },
-            categories: this.props.columns[0]
+            show:false
+          },
+        y:{
+            show:false
           },
         rotated:true
       },
-
+      legend: {
+          show: false
+      },
+    tooltip: {
+        show: false
+    },
       size: {
         height:chartHeight
       }
     });
   },
   render() {
-    return <div id={this.props.id}></div>;    
+    return <div id={this.props.id} ref="refName" ></div>;    
   }
 });
 
@@ -99,7 +103,7 @@ var Scatter = React.createClass({
     });
   },
   render() {
-    return <div id={this.props.id}></div>;    
+    return <div id={this.props.id} ></div>;    
   }
 });
 

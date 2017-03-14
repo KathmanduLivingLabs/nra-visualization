@@ -199,3 +199,9 @@ a:focus,
     font-size:15px;
     text-transform:uppercase;
 }
+
+/*Links*/
+.more {
+    font-family: 'Open Sans', serif;
+    font-size:10px;
+}

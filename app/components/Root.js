@@ -28,7 +28,6 @@ var Root = React.createClass({
 
 
 					<Maps.Multi/>
-						<Insights/>
 				</div>
 			)
 				
