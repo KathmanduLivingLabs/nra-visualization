@@ -1,6 +1,6 @@
 {
-  "name": "prepare-pokhara-web",
-  "version": "1.0.2",
+  "name": "nra_visualization",
+  "version": "1.0.1",
   "description": "Visualization app for the Pokhara secondary cities project",
   "main": "index.js",
   "scripts": {
