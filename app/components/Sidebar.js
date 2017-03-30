@@ -1,112 +1,88 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var Link=ReactRouter.Link;
-var Nav = require('../components/Nav.js')
-var Maps = require('../components/Maps.js')
 var Insights = require('../components/Insights.js')
+var Modal = require('../utils/Modal')
 var Chart = require('./c3Chart.js')
-var MyModal = require('../utils/Modal')
-
-
+var ModalContent = require('../components/ModalContent')
 
 require('leaflet-sidebar-v2')
 require('../styles/leaflet-sidebar.css')
 require('../styles/styles.css')
 
-// Load Components
-// var Nav = require('./Nav')
-
-// var MyMap = require('./Maps')
-
-require("../styles/styles.css")
 
 var Sidebar = React.createClass({
-	getInitialState: function() {
-		return {
-			chartData: [["a","b","c"],["yaxis",62.28452945,57.92606443,75.47298675]],
-			modalIsOpen: false
-		}
-	},
- 	openModal: function () {
-        this.setState({modalIsOpen: true});
+    getInitialState: function() {
+        return {
+            isModalOpen: false,
+            modalType: "construction"
+        }
+    },
+    componentDidUpdate: function() {},
+    _openModal: function(type) {
+        this.setState({
+            modalType: type,
+            isModalOpen: true
+        });
     },
 
-    afterOpenModal: function () {
+    _afterOpenModal: function() {},
+
+    _closeModal: function() {
+        this.setState({ isModalOpen: false });
     },
 
-    closeModal: function () {
-        this.setState({modalIsOpen: false});
-    },
+    render: function() {
+        return (
+            <div>
 
-	render: function(){
-		return(
-			<div>	
-
-					<MyModal isOpen={this.state.modalIsOpen} onClose={() => this.closeModal()}>
-						<div className="row-fluid modal-wrapper">
-							<div className="col-md-12 col-lg-12 col-sm-12">
-								<h3 className="modal-header">Deep Dive</h3>
-							</div>
-							
-							<div className="col-md-3 col-lg-3 col-sm-3">
-								<div className="chart-container ">
-								<p className="bar-header">Status of construction</p>
-								<Chart.ClusteredColumn data = {[['data1', 25,24, 34 ]]}  id="chart4" chartType="bar"/>
-								</div>
-								
-							</div>
-							<div className="col-md-9 col-lg-9 col-sm-9 right-column">
-							 <div className="styled-select blue semi-square">
-							 <select className="col-md-12 ">
-							  <option value="volvo">Type of house design followed</option>
-							  <option value="saab">Type of building foundation</option>
-							  <option value="mercedes">Superstructure of the house</option>
-							  <option value="audi">Roof design</option>
-							</select>
-							</div> 
-								<div className="slight-padding">
-								<Chart.ClusteredColumn data = {[['data1', 25,54, 34 ],['data2', 65,66,11 ],['data12', 65,66,11 ],['data42', 65,66,11 ],['data3', 10,11,54]]} id="chart3" chartType="bar"/>
-								</div>
-							</div>
-
-						</div>
-						<p><button onClick={() => this.closeModal()}>Close</button></p>
-					</MyModal>
+            <Modal isOpen={this.state.isModalOpen} onClose={() => this._closeModal()}>
+            	<ModalContent header = {this.props.header} locationParams = {this.props.locationParams} primaryData= {this.props.data} closeModal={this._closeModal} modalType = {this.state.modalType} />
+            </Modal>
 
 			 <div id="sidebar" className="sidebar collapsed ">
 			        <div className="sidebar-tabs ">
 			            <ul role="tablist">
 			                <li><a href="#home" role="tab"><i className="fa fa-area-chart"></i></a></li>
+			                <li id = "nolink"><a  href="#info" role="tab"><i className="fa fa-info-circle"></i></a></li>
 			            </ul>
 
 
 			        </div>
 
 			        <div className="sidebar-content">
-			            <div className="sidebar-pane" id="home">
-			                <h1 className="sidebar-header pull-right">
+			            <div className="sidebar-pane " id="home">
+			                <h1 className="sidebar-header">
 			                    <span className="sidebar-close"><i className="fa fa-remove"></i></span>
+			                	{this.props.header}
 			                </h1>
-								<Insights modalOpener={this.openModal} large= {this.props.large} />
+								<Insights modalOpener={this._openModal} data={this.props.data}/>
+			            </div>
+			            <div className="sidebar-pane " id="info">
+			                <h1 className="sidebar-header">
+			                    <span className="sidebar-close"><i className="fa fa-remove"></i></span>
+			                	ABOUT THIS TOOL
+			                </h1>
+			                <div className="row-fluid ">
+			                <div className="content-row info-text col-md-12 col-lg-12 col-sm-12 ">
+			                <div className="row-fluid bar-header">WELCOME</div>
+			                <div className="row-fluid info-content">
+			                <p>Nullam vel vulputate massa, vitae mollis tellus. Praesent tristique est id massa consectetur, sed finibus velit cursus. 
+			                	Sed rutrum consectetur vestibulum. Aenean elit leo, placerat imperdiet tincidunt et, efficitur eu lorem. 
+			                	Pellentesque scelerisque, erat ac accumsan vestibulum, mi odio pretium ipsum, at varius diam ante eget augue. Duis quis lacinia libero. 
+			                	Vivamus urna tortor, ultricies et libero ac, pharetra gravida mi. Praesent scelerisque eu libero in congue.</p>
+			                <p>Sed in hendrerit purus. Nam ultrices volutpat leo non rhoncus. Aliquam mollis sem non neque feugiat, facilisis porttitor sem luctus. 
+			                Etiam risus diam, efficitur et erat nec, vulputate tincidunt arcu. Ut in pulvinar mauris, quis placerat lorem. 
+			                Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque varius, nulla eget rhoncus dapibus, lectus velit ultrices tortor, non cursus lorem nulla ut justo.</p>
+			                </div>
+			                </div>
+			                </div>
 			            </div>
 
-			            <div className="sidebar-pane" id="profile">
-			                <h1 className="sidebar-header">Profile<span className="sidebar-close"><i className="fa fa-caret-left"></i></span></h1>
-			            </div>
-
-			            <div className="sidebar-pane" id="messages">
-			                <h1 className="sidebar-header">Messages<span className="sidebar-close"><i className="fa fa-caret-left"></i></span></h1>
-			            </div>
-
-			            <div className="sidebar-pane" id="settings">
-			                <h1 className="sidebar-header">Settings<span className="sidebar-close"><i className="fa fa-caret-left"></i></span></h1>
-			            </div>
 			        </div>
 			</div>
 			</div>
-			)
-				
-	}
+        )
+
+    }
 })
 
 module.exports = Sidebar;

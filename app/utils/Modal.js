@@ -4,7 +4,6 @@ var React = require('react');
 var Modal = React.createClass({
 	close: function (e) {
 		e.preventDefault()
-
 		if (this.props.onClose) {
 			this.props.onClose()
 		}
@@ -19,7 +18,7 @@ var Modal = React.createClass({
 	      width:'80%',
 	      top: '50%',
 	      left: '50%',
-	      padding: '15px',
+	      padding: '22px',
 	      transform: 'translate(-50%, -50%)',
 	      zIndex: '9999',
 	      background: 'rgb(245,245,245)'
@@ -33,7 +32,7 @@ var Modal = React.createClass({
 	      left: '0px',
 	      zIndex: '9998',
 	      background: 'rgba(0, 0, 0, 0.3)'
-	    }
+	      }
 
 
 		return (

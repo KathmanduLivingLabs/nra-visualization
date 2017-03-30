@@ -1,96 +1,68 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
 var Chart = require('./c3Chart.js')
-var Modal = require('react-modal')
 var MyModal = require('../utils/Modal')
-
-require("../styles/styles.css")
-
-// Load Components var Nav = require('./Nav') var MyMap = require('./Maps')
-
-require("../styles/styles.css")
 
 var customStyles = {
     content: {
-        bottom     : 'auto',
-        left       : '50%',
+        bottom: 'auto',
+        left: '50%',
         marginRight: '-50%',
-        right      : 'auto',
-        top        : '50%',
-        transform  : 'translate(-50%, -50%)',
-        width      : '50%'
+        right: 'auto',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '50%'
     }
 };
 
 var Insights = React.createClass({
-    getInitialState: function () {
-        return {
-            chartData  : [
-                [
-                    "Yes", "No", ""
-                ],
-                [
-                    "yaxis", 80, 20, 0
-                ]
-            ],
-            chartData1 : [
-                [
-                    "Construction Completed", "Under Construction", "Not Started Yet"
-                ],
-                [
-                    "yaxis", 9, 57, 34
-                ]
-            ],
-            modalIsOpen: false
-        }
+    componentWillMount: function() {
+        // console.log("My data",this.props.data.stats.survey_status)
     },
-
-    openModal: function () {
-        this.setState({modalIsOpen: true});
+    _formatNumber: function(data) {
+        var format = d3.format(",");
+        return format(data)
     },
-
-    afterOpenModal: function () {
-        // this.refs.subtitle.style.color      = '#29BF9A';
-        // this.refs.subtitle.style.fontFamily = 'Open Sans';
-        // // references are now sync'd and can be accessed.
-    },
-
-    closeModal: function () {
-        this.setState({modalIsOpen: false});
-    },
-
-    render: function () {
+    render: function() {
         return (
             <div className="row-fluid ">
 
-
-                <div className="col-md-12 col-lg-12 col-sm-12">
-                    <div className="row-fluid bar-header">Surveys Submitted</div>
-                    <div className="row-fluid total-surveys">7823</div>
-
-                </div>
-                <div className="col-md-12 col-lg-12 col-sm-12 ">
-                    <div className="row-fluid bar-header">status of construction</div>
-                    <a onClick={() => this.props.modalOpener()} className="more">Learn More >></a>
-                    <div className="row-fluid  "><Chart.LineAreaBar columns={this.state.chartData1} id="chart1" chartType="bar"/><hr/></div>
+                <div className="content-row col-md-12 col-lg-12 col-sm-12">
+                    <div className="row-fluid bar-header">total beneficiaries surveyed</div>
+                    <div className="row-fluid total-surveys">{this._formatNumber(this.props.data.stats.survey_status.surveys)} ({((this.props.data.stats.survey_status.surveys/this.props.data.stats.survey_status.beneficiaries)*100).toFixed(0)}%)</div>
+                    <div className="row-fluid proportion-surveys">out of <span className="bold">{this._formatNumber(this.props.data.stats.survey_status.beneficiaries)}</span></div>
                 </div>
 
-                <div className="col-md-12 col-lg-12 col-sm-12">
-                    <div className="row-fluid bar-header">Applied for second installment?</div>
-                    <a onClick={() => this.props.modalOpener()}className="more">Learn More >>
-                    </a>
+                <div className="content-row col-md-12 col-lg-12 col-sm-12 ">
+                    <span className="row-fluid bar-header">status of reconstructed houses *</span>
+                    <span className="row-fluid more"><a onClick={() => this.props.modalOpener("construction")}  className="details-link"> (View Details)</a></span>
+                    <div className="row-fluid  "><Chart.Bar id="chart1" percentageData = {this.props.data.percentageStats.construction_status} values = {this.props.data.stats.construction_status}/></div>
+                </div>
+                <div className="content-row col-md-12 col-lg-12 col-sm-12">
+
+                    <div className="row-fluid bar-header">Received the first installment? *</div>
+
                     <div className="row-fluid ">
-                    <Chart.LineAreaBar
-                        large={this.props.large}
-                        columns={this.state.chartData}
-                        id="chart2"
-                        chartType="bar"/></div>
+                    <Chart.Bar id="chart3" percentageData= {this.props.data.percentageStats.grant_status} values = {this.props.data.stats.grant_status}/>
+                    </div>
                 </div>
+
+
+                <div className="content-row col-md-12 col-lg-12 col-sm-12">
+                    <span className="row-fluid bar-header">Applied for second installment? *</span>
+                    <span className="row-fluid more"><a onClick={() => this.props.modalOpener("installment")}  className="details-link"> (View Details)</a></span>
+                    <div className="row-fluid ">
+                    <Chart.Bar id="chart2" percentageData= {this.props.data.percentageStats.installment_status} values = {this.props.data.stats.installment_status}/>
+                    </div>
+                </div>
+
+                <div className="content-row col-md-12 col-lg-12 col-sm-12">
+                    <span className="row-fluid footnote">* Percentage distribution is based on the total beneficiaries surveyed till date. (i.e. 100% = {this._formatNumber(this.props.data.stats.survey_status.surveys)} beneficiaries.)</span>
+                </div>
+
             </div>
 
-            )
-	}
+        )
+    }
 })
 
 module.exports = Insights;
